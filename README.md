@@ -1,6 +1,6 @@
 # Wymiana-walut
 
-#Plan
+# Plan
 ![Diagram bez tytułu drawio (3)](https://github.com/Jesoenn/Wymiana-walut/assets/147878425/43de82ad-eed9-4fd0-b2d4-44370f1beee1)
 
 
