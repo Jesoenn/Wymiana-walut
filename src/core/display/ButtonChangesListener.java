@@ -7,7 +7,6 @@ import java.awt.event.ItemListener;
 
 public class ButtonChangesListener implements ItemListener {
     public boolean changed;
-    private String newCurrencyCode;
     private ButtonsManager manager;
     public ButtonChangesListener(ButtonsManager manager){
         this.manager=manager;
@@ -16,12 +15,12 @@ public class ButtonChangesListener implements ItemListener {
     //Second change -> new selected item
     @Override
     public void itemStateChanged(ItemEvent e) {
+        //Second change
         if(changed){
-            newCurrencyCode=(String) e.getItem();
-            System.out.println(newCurrencyCode);
             changed=false;
             manager.buttonsChanged();
         }
+        //First change
         else
             changed=true;
     }

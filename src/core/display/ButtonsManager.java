@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import core.currencies.CurrenciesManager;
 import core.currencies.Currency;
-import resources.NewFonts;
+import core.display.downloaders.NewFonts;
 
 import javax.swing.*;
 
@@ -33,22 +33,16 @@ public class ButtonsManager {
         setComboBoxParameters(editableChooser,1,24);
         setComboBoxParameters(answerChooser,2,9);
     }
-    //Extracting currency codes from Currency objects
+
+    /**
+     * Extracting currency codes from Currency objects
+     */
     private void createCurrencyCodes(ArrayList<Currency> currencies){
         currencyCodes=new ArrayList<>();
         for(Currency currency: currencies){
             currencyCodes.add(currency.getCode());
         }
         currencyCodes.sort(String::compareToIgnoreCase);
-    }
-    public JComboBox getEditableChooser() {
-        return editableChooser;
-    }
-    public JComboBox getAnswerChooser() {
-        return answerChooser;
-    }
-    public JTextField getInputText(){
-        return inputText;
     }
     private void setComboBoxParameters(JComboBox comboBox,int row,int index){
         comboBox.setSelectedIndex(index);
@@ -65,7 +59,8 @@ public class ButtonsManager {
         textField.setText("Enter number to convert");
         textField.setBorder(null);
         textField.setOpaque(false);
-        textField.addFocusListener(new FocusListener() {  //After pressing the text, default tip disappears
+        //After pressing the text, default tip disappears
+        textField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 textField.setText("");
@@ -74,10 +69,11 @@ public class ButtonsManager {
             @Override
             public void focusLost(FocusEvent e) {}
         });
+        //Listener that checks if text format is correct - only numbers, etc
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                //If typed character isnt a number or .
+                //If typed character isn't a number or .
                 if(e.getKeyChar()!='.' && !(e.getKeyChar()>='0' && e.getKeyChar()<='9')){
                     e.consume();
                     return;
@@ -108,7 +104,21 @@ public class ButtonsManager {
         textField.setEditable(true);
         textField.setVisible(true);
     }
+
+    /**
+     * When comboBox is changed this method gets called by ButtonChangeListener
+     * which initiates currency conversion in CurrencyManager
+     */
     public void buttonsChanged(){
         manager.initiateCalculation((String)editableChooser.getSelectedItem(),(String)answerChooser.getSelectedItem(),inputText.getText());
+    }
+    public JComboBox getEditableChooser() {
+        return editableChooser;
+    }
+    public JComboBox getAnswerChooser() {
+        return answerChooser;
+    }
+    public JTextField getInputText(){
+        return inputText;
     }
 }

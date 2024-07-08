@@ -8,13 +8,17 @@ import java.util.ArrayList;
 
 public class CurrencyCalculator {
     private Double valueRelativeToPLNInput,valueRelativeToPLNAnswer,givenInputToCalculate;
-    private ArrayList<Currency> currencies;
-    private BigDecimal roundedAnswer=BigDecimal.valueOf(0);
+    private ArrayList<Currency> currencies; //All currencies
+    private BigDecimal roundedAnswer=BigDecimal.valueOf(0); //Default value is 0
     public CurrencyCalculator(ArrayList<Currency> currencies){
         this.currencies=currencies;
     }
+
+    /**
+     * Get current displayed currency codes from ButtonsManager passed through CurrenciesManager
+     */
     public void giveCodes(String codeInput, String codeAnswer,String inputText){
-        //If number wasnt typed in
+        //If number isn't typed in
         if(inputText.contains("Enter number to convert") || inputText.equals(""))
             return;
         givenInputToCalculate= Double.valueOf(inputText);
@@ -29,7 +33,7 @@ public class CurrencyCalculator {
     }
     private void calculate(){
         Double input=givenInputToCalculate*valueRelativeToPLNInput;
-        Double answer=input/valueRelativeToPLNAnswer;
+        double answer=input/valueRelativeToPLNAnswer;
         roundedAnswer=BigDecimal.valueOf(answer).setScale(2,BigDecimal.ROUND_HALF_UP);
     }
     public BigDecimal getRoundedAnswer(){

@@ -2,10 +2,9 @@ package core.display;
 
 import core.currencies.CurrenciesManager;
 import core.currencies.Currency;
-import resources.DownloadManager;
-import resources.NewFonts;
+import core.display.downloaders.DownloadManager;
+import core.display.downloaders.NewFonts;
 
-import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,21 +13,30 @@ import static core.display.MainPanel.height;
 import static core.display.MainPanel.width;
 
 public class CurrencyPainter {
-    private ArrayList<Currency> randomCurrencies;
-    private ArrayList<Currency> displayedCurrencies;
+    private ArrayList<Currency> randomCurrencies;       //Randomly picked currencies
+    private ArrayList<Currency> displayedCurrencies;    //Current conversion rates for displayed currencies
     public void drawDate(Graphics2D g2d){
-        //Middle text: Actual date
+        //Middle panel text: Actual date
         g2d.setColor(new Color(149, 149, 149));
         String displayText= CurrenciesManager.getCurrencyValuesDate();
         g2d.setFont(NewFonts.manrope.deriveFont(13f));
         int textWidth=g2d.getFontMetrics().stringWidth(displayText);
         g2d.drawString(displayText,width-130+(120-textWidth)/2,height/2+g2d.getFontMetrics().getHeight()+2);
     }
+
+    /**
+     * Draw converted number under JTextField
+     * @param answer number to paint
+     */
     public void drawCalculatedAnswer(Graphics2D g2d, BigDecimal answer){
         g2d.setFont(NewFonts.manrope.deriveFont(Font.BOLD,21f));
         g2d.setColor(new Color(138,142,165));
         g2d.drawString(answer.toString(),30,193);
     }
+
+    /**
+     * Draw current conversion rates in upper panel
+     */
     public void drawCurrentCurrencies(Graphics2D g2d){
         int y=255;
         String text;
@@ -69,6 +77,7 @@ public class CurrencyPainter {
             g2d.drawString(currency.getValueRelativeToPLN()+" PLN",width-150,y);
             g2d.setFont(NewFonts.manrope.deriveFont(Font.PLAIN,12f));
             g2d.drawString("polski zloty",width-150,y+20);
+            //draw charts
             if(currency.getValueRelativeToPLN()>=1)
                 g2d.drawImage(DownloadManager.blueChart,width-280,y-20,100,40,null);
             else
@@ -76,15 +85,11 @@ public class CurrencyPainter {
 
             y+=80;
         }
-        customLine(g2d);
     }
     public void updateTwoDisplayedCurrencies(ArrayList<Currency> currencies){
         displayedCurrencies=currencies;
     }
     public void setRandomCurrencies(ArrayList<Currency> randomCurrencies) {
         this.randomCurrencies = randomCurrencies;
-    }
-    private void customLine(Graphics2D g2d){
-
     }
 }

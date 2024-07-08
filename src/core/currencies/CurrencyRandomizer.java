@@ -10,6 +10,10 @@ public class CurrencyRandomizer {
         currencies=CurrenciesManager.getCurrencies();
         pickRandomCurrencies();
     }
+
+    /**
+     * Choose 2 random currencies from CurrenciesManager's arraylist
+     */
     private void pickRandomCurrencies(){
         Random randomNumber=new Random();
         int howManyCurrencies=currencies.size();

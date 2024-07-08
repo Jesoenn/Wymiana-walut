@@ -1,6 +1,6 @@
 package core.display;
 
-import resources.DownloadManager;
+import core.display.downloaders.DownloadManager;
 
 import javax.swing.*;
 import java.awt.*;

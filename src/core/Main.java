@@ -9,7 +9,7 @@ public class Main {
         CreateFrame window=new CreateFrame();
         CurrenciesManager manager=new CurrenciesManager();
         MainPanel panel=new MainPanel(manager);
-        manager.setPanel(panel);
+        manager.setPanel(panel); //set panel as a panel for currenciesManager
         window.add(panel);
         window.pack();
     }

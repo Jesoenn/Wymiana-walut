@@ -1,7 +1,7 @@
 package core.display;
 
 import core.currencies.CurrenciesManager;
-import resources.NewFonts;
+import core.display.downloaders.NewFonts;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class MainPanel extends JPanel {
         answerChooser=manager.buttonsManager.getAnswerChooser();
         add(editableChooser);
         add(answerChooser);
-        //Adding text fields
+        //Adding text field
         inputText=manager.buttonsManager.getInputText();
         add(inputText);
     }
